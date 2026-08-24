@@ -1,0 +1,21 @@
+add_namespace = axis_force
+
+country_event = {
+    id = axis_force.1
+    hidden = yes
+    
+    is_triggered_only = yes
+    
+    mean_time_to_happen = {
+        days = 1
+    }
+    
+    immediate = {
+        # 'PREV' or the scoped country itself gets added to Germany's faction
+        GER = {
+            add_to_faction = ROOT
+        }
+    }
+}
+
+

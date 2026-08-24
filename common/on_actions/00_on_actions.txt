@@ -1,0 +1,82 @@
+
+
+on_actions = {
+    # Fires every day for every country in the world
+    on_weekly = {
+        effect = {
+            # Check if the country is one of your targets and is fascist
+            if = {
+                limit = {
+					original_tag = ENG
+					date > 1938.1.1
+                    NOT = { has_government = fascism }
+                }
+				# Instantly set government to fascism and add ruling party support
+				set_politics = {
+					ruling_party = fascism
+					elections_allowed = no
+				}
+				
+				# Optional: Force-complete specific focuses down the Blackshirt tree if needed
+				complete_national_focus = ENG_a_change_in_course 
+				complete_national_focus = ENG_organize_the_blackshirts
+				complete_national_focus = ENG_the_british_path_to_fascism
+				
+				country_event = { id = axis_force.1 }
+            }
+			
+
+			
+			if = {
+				limit = {
+					original_tag = JAP
+					#has_dlc = "No Compromise, No Surrender"
+					date > 1938.1.1				
+                    NOT = { has_government = fascism }
+					
+					GER = { 
+                        has_government = fascism 
+                        exists = yes 
+                        # GERMANY MUST HAVE COMPLETED ANSCHLUSS FIRST
+                        has_completed_focus = GER_anschluss 
+                    }
+				}
+				# Put code here that relies on NCNS-specific focus paths or triggers
+				set_politics = {
+					ruling_party = fascism
+					elections_allowed = no
+				}
+				
+				country_event = { id = axis_force.1 }
+				
+				#complete_national_focus = JAP_sea_purge_the_kodoha_faction
+				#complete_national_focus = JAP_promulgate_the_military_ministers_system
+				#complete_national_focus = JAP_the_harakiri_debate
+				
+			}
+
+			# --- ITALY SAFETY NET & FACTION CHECK ---
+			if = {
+				limit = {
+					original_tag = ITA
+					date > 1937.01.01
+					has_government = fascism
+					NOT = { is_in_faction_with = GER }
+					GER = { 
+						has_government = fascism 
+						exists = yes 
+						has_completed_focus = GER_anschluss 
+					}
+				}
+				GER = {
+					add_to_faction = ITA
+				}
+			}
+
+        }
+    }
+}
+
+
+
+
